@@ -1,0 +1,6 @@
+<%- | Limits::Domain $domain,
+      Limits::Type $type,
+      Limits::Item $item,
+      Limits::Value $value,
+| -%>
+<%= sprintf("%-33s", $domain) %> <%= sprintf("%-7s", $type) %> <%= sprintf("%-15s", $item) %> <%= $value %>
