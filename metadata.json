@@ -1,6 +1,6 @@
 {
   "name": "ludovicus-limits",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Jason Galens",
   "summary": "Manage PAM limits on Linux Systems",
   "license": "Apache-2.0",
