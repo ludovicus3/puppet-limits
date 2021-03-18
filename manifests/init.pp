@@ -6,9 +6,8 @@
 #   include limits
 class limits (
   Stdlib::Absolutepath $config_file = '/etc/security/limits.conf',
-  Hash $default_limits = {},
   Stdlib::Absolutepath $directory = '/etc/security/limits.d',
-  Hash $configs = {},
+  Hash $default_limits = {},
   Boolean $purge = false,
 ) {
   if $purge {
@@ -26,6 +25,5 @@ class limits (
     recurse => $recurse,
   }
 
-  ensure_resources('limits::config', $configs)
   ensure_resources('limits::limit', $default_limits)
 }

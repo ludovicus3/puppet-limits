@@ -17,6 +17,8 @@ describe 'limits::limit' do
 
       it do
         is_expected.to compile
+        is_expected.to contain_concat__fragment('/etc/security/limits.conf-namevar')
+          .with_content(/^\*\s+-\s+core\s+0$/)
       end
     end
   end

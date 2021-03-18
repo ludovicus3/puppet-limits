@@ -7,10 +7,11 @@
 define limits::limit (
   Limits::Item $item,
   Limits::Value $value,
-  Integer $order = 10,
-  Optional[String] $target = undef,
+  Integer $order = 50,
   Optional[Limits::Domain] $domain = undef,
   Optional[Limits::Type] $type = undef,
+  Optional[Stdlib::Absolutepath] $target = undef,
+  Optional[String] $comment = undef,
 ) {
   include 'limits'
 
@@ -21,11 +22,12 @@ define limits::limit (
 
   if !defined(Concat[$_target]) {
     concat { $_target:
-      ensure         => present,
-      owner          => 'root',
-      group          => 'root',
-      mode           => '0644',
-      ensure_newline => true,
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      warn   => epp('limits/header.epp'),
+      #      ensure_newline => true,
     }
   }
 
@@ -42,10 +44,11 @@ define limits::limit (
   concat::fragment {"${_target}-${title}":
     target  => $_target,
     content => epp('limits/limit.epp', {
-      domain => $_domain,
-      type   => $_type,
-      item   => $item,
-      value  => $value,
+      domain  => $_domain,
+      type    => $_type,
+      item    => $item,
+      value   => $value,
+      comment => $comment,
     }),
     order   => $order,
   }

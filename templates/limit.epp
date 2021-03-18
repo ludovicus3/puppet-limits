@@ -2,5 +2,9 @@
       Limits::Type $type,
       Limits::Item $item,
       Limits::Value $value,
+      Optional[String] $comment = undef,
 | -%>
+<%- if $comment != undef { -%>
+# <%= $comment %>
+<%- } -%>
 <%= sprintf("%-33s", $domain) %> <%= sprintf("%-7s", $type) %> <%= sprintf("%-15s", $item) %> <%= $value %>
